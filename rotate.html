@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>react-rotate</title>
+    <script src="../react-demos/build/react.js"></script>
+    <script src="../react-demos/build/react-dom.js"></script>
+    <script src="../react-demos/build/browser.min.js"></script>
+
+    <style>
+        div{
+            width: 100px;
+            height: 100px;
+            background: pink;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+        }
+    </style>
+</head>
+<body>
+    
+    <script type="text/babel">
+        var Rotate = React.createClass({
+            getInitialState: function () {
+                return {
+                    transform: 'rotate(180deg)',
+                    deg: 90
+                }
+            },
+
+            componentDidMount: function () {
+                var deg = this.state.deg;
+                
+                this.timer = setInterval(function () {
+                    deg -= 10;
+                    if ( deg <= 0 ) {
+                        deg = 90;
+                    }
+
+                    this.setState({
+                        transform: 'rotate(' + deg + 'deg)'
+                    });
+
+                }.bind(this), 100);
+            },
+
+            render: function () {
+                return (
+                    <div style={{transform: this.state.transform}}></div>
+                );
+            }
+        });
+
+        ReactDOM.render(
+            <Rotate />,
+            document.body
+        );
+    </script>
+</body>
+</html>
